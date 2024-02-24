@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>MetaMask Example</title>
+    <script src="https://cdn.jsdelivr.net/npm/@metamask/legacy-web3@1.5.2/dist/web3.min.js"></script>
+  </head>
+  <body>
+    <button id="connect">Connect to MetaMask</button>
+    <script>
+      const web3 = new Web3(Web3.givenProvider || "http://localhost:8545");
+      const connectButton = document.getElementById("connect");
+
+      connectButton.addEventListener("click", async () => {
+        if (web3.currentProvider.isMetaMask) {
+          try {
+            const accounts = await web3.eth.getAccounts();
+            console.log("Connected to MetaMask: ", accounts[0]);
+          } catch (error) {
+            console.error("Error connecting to MetaMask: ", error);
+          }
+        } else {
+          console.error("Please install MetaMask to use this example.");
+        }
+      });
+    </script>
+  </body>
+</html>
